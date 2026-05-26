@@ -1,0 +1,297 @@
+<!-- =========================
+📄 index.html
+========================= -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>Notas App</title>
+
+  <meta name="theme-color"
+  content="#1e1e1e">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1e293b">
+  <link rel="manifest"
+  href="manifest.json">
+
+  <link rel="stylesheet"
+  href="css/style.css">
+
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- =========================
+TOPBAR
+========================= -->
+
+<header class="topbar">
+
+  <button id="menuBtn"
+  class="icon-btn">
+
+    <i class="fas fa-bars"></i>
+
+  </button>
+
+  <select id="folderSelect">
+
+    <option value="Todas">
+      Todas
+    </option>
+
+  </select>
+
+  <div class="top-actions">
+
+    <button id="searchBtn"
+    class="icon-btn">
+
+      <i class="fas fa-search"></i>
+
+    </button>
+
+    <button id="optionsBtn"
+    class="icon-btn">
+
+      <i class="fas fa-ellipsis-vertical"></i>
+
+    </button>
+
+  </div>
+
+</header>
+
+<!-- =========================
+SEARCH
+========================= -->
+
+<div id="searchBar"
+class="search-bar hidden">
+
+  <input type="text"
+  id="searchInput"
+  placeholder="Buscar nota...">
+
+</div>
+
+<!-- =========================
+SIDEBAR
+========================= -->
+
+<aside id="sidebar"
+class="sidebar">
+
+  <div class="menu-block">
+
+    <i class="fas fa-house"></i>
+
+    <span>Notas</span>
+
+    <span id="totalNotes">0</span>
+
+  </div>
+
+  <div class="menu-block">
+
+    <i class="fas fa-star"></i>
+
+    <span>Destacadas</span>
+
+    <span id="starredCount">0</span>
+
+  </div>
+
+  <div class="menu-block folders-block">
+
+    <div class="folder-header"
+    onclick="toggleFolders()">
+
+      <div class="folder-title">
+
+        <i class="fas fa-folder"></i>
+
+        <span>Carpetas</span>
+
+      </div>
+
+      <i id="folderArrow"
+      class="fas fa-chevron-down"></i>
+
+    </div>
+
+    <div id="folderContent"
+    class="folder-content">
+
+      <button id="manageFolders">
+
+        Administrar
+
+      </button>
+
+      <div id="foldersList"></div>
+
+    </div>
+
+  </div>
+
+  <div class="menu-block">
+
+    <i class="fas fa-trash"></i>
+
+    <span>Eliminadas</span>
+
+    <span id="deletedCount">0</span>
+
+  </div>
+
+</aside>
+
+<!-- =========================
+DROPDOWN
+========================= -->
+
+<div id="dropdownMenu"
+class="dropdown hidden">
+
+  <button onclick="expandAll()">
+    Expandir notas
+  </button>
+
+  <button onclick="collapseAll()">
+    Contraer notas
+  </button>
+
+  <button onclick="sortByDate()">
+    Ordenar por fecha
+  </button>
+
+  <button onclick="sortByTitle()">
+    Ordenar por título
+  </button>
+  <button onclick="exportBackup()">
+  Respaldar notas
+</button>
+
+   <button onclick="importBackup()">
+  Restaurar respaldo
+</button>
+
+   <input
+    type="file"
+    id="backupInput"
+    accept="application/json"
+    class="hidden">
+</div>
+
+<!-- =========================
+NOTES
+========================= -->
+
+<main id="notesContainer"></main>
+
+<!-- =========================
+FLOAT BUTTON
+========================= -->
+
+<button id="addNoteBtn">
+
+  <i class="fas fa-plus"></i>
+
+</button>
+
+<!-- =========================
+NOTE MODAL
+========================= -->
+
+<div id="noteModal"
+class="modal hidden">
+
+  <div class="modal-content">
+
+    <input type="text"
+    id="noteTitle"
+    placeholder="Título">
+
+    <textarea id="noteContent"
+    placeholder="Escribe tu nota..."></textarea>
+
+    <select id="noteFolder"></select>
+
+    <label>
+
+      <input type="checkbox"
+      id="noteStar">
+
+      Destacar
+
+    </label>
+
+    <div class="modal-actions">
+
+      <button id="saveNote">
+        Guardar
+      </button>
+
+      <button id="cancelNote">
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+FOLDER MODAL
+========================= -->
+
+<div id="folderModal"
+class="modal hidden">
+
+  <div class="modal-content">
+
+    <h2>Administrar Carpetas</h2>
+
+    <div class="folder-create">
+
+      <input type="text"
+      id="newFolderInput"
+      placeholder="Nueva carpeta">
+
+      <button id="createFolderBtn">
+        Crear
+      </button>
+
+    </div>
+
+    <div id="foldersManagerList"></div>
+
+    <button id="closeFolderModal">
+      Cerrar
+    </button>
+
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("Service Worker registrado"));
+}
+</script>
+</body>
+</html>
