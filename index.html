@@ -154,7 +154,16 @@ class="sidebar">
     <span id="deletedCount">0</span>
 
   </div>
+<div class="menu-item" onclick="mostrarQR()">
+  💳 Pago por QR
+</div>
 
+<div id="qrModal" class="hidden">
+    <div class="qr-content">
+        <span onclick="cerrarQR()">✖</span>
+        <img src="img/qr-pago.png" alt="QR de Pago">
+    </div>
+</div>
 </aside>
 
 <!-- =========================
